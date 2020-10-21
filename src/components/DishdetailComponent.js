@@ -1,25 +1,39 @@
-import React,{Component} from 'react';
+import React from 'react';
 import { Card,CardImg,CardText,CardBody,CardTitle } from 'reactstrap';
 
-class Dishdetail extends Component
-{
-    constructor(props)
+    const Dishdetail =(props)=>
     {
-        super(props);
-        this.state={
-
-        }
-
+        return(
+        <RenderDish dish={props.dish}/>
+        );
     }
-
-    render()
+   
+    function RenderDish({dish}) {
+        if (dish != null)
+          {  
+            return(
+                <div className="row">
+                <div key={dish.id} className="col-12 col-md-5 m-1">
+                <Card>
+                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardBody>
+                      <CardTitle>{dish.name}</CardTitle>
+                      <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+                </div>
+                       <div ><RenderComments comments={dish.comments}/></div>
+                </div>
+            );
+          }
+        else
+            return(
+                <div></div>
+            );
+    }  
+    function RenderComments({comments})
     {
-                const dish = this.props.dish;
-                return this.renderDish(dish);
-    }
-    renderComments(comments)
-    {
-        const com= comments.map((commo)=>{
+        const com = comments.map((commo)=>{
             return(
                          <div key={commo.id} className="col-12 list-unstyled">
                             <ul className="list-unstyled">
@@ -38,29 +52,4 @@ class Dishdetail extends Component
         </div>
         );
     }
-    renderDish(dish) {
-        if (dish != null)
-          {  
-            var comments = this.renderComments(dish.comments);
-            return(
-                <div className="row">
-                <div key={dish.id} className="col-12 col-md-5 m-1">
-                <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                      <CardTitle>{dish.name}</CardTitle>
-                      <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
-                </div>
-                        <div >{comments}</div>
-                </div>
-            );
-          }
-        else
-            return(
-                <div></div>
-            );
-    }  
-}
 export default Dishdetail;
