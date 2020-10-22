@@ -1,18 +1,38 @@
 import React from 'react';
-import { Card,CardImg,CardText,CardBody,CardTitle } from 'reactstrap';
-
+import { Card,CardImg,CardText,CardBody,CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
     const Dishdetail =(props)=>
     {
+       if(props.dish != null)
+       {
         return(
-        <RenderDish dish={props.dish}/>
-        );
-    }
-   
-    function RenderDish({dish}) {
-        if (dish != null)
-          {  
-            return(
+            <div className="container">
+                    <div className="row">
+                            <Breadcrumb>
+                            <BreadcrumbItem><Link to ='/menu'>Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                            </Breadcrumb>   
+                                <div className="col-12">
+                            <h3>{props.dish.name}</h3>
+                                    <hr/>
+                                </div>
+                   </div>
                 <div className="row">
+                    <RenderDish dish={props.dish} />
+                    <RenderComments comments={props.comments}/>
+                </div>
+            </div>
+        );
+       }
+       else{
+        return(
+            <div></div>
+        );
+       }
+    }
+
+    function RenderDish({dish}) {
+            return(
                 <div key={dish.id} className="col-12 col-md-5 m-1">
                 <Card>
                     <CardImg top src={dish.image} alt={dish.name} />
@@ -22,34 +42,25 @@ import { Card,CardImg,CardText,CardBody,CardTitle } from 'reactstrap';
                     </CardBody>
                 </Card>
                 </div>
-                       <div ><RenderComments comments={dish.comments}/></div>
-                </div>
             );
-          }
-        else
-            return(
-                <div></div>
-            );
-    }  
+        }
     function RenderComments({comments})
     {
-        const com = comments.map((commo)=>{
+        var com=comments.map((comment)=>{
             return(
-                         <div key={commo.id} className="col-12 list-unstyled">
-                            <ul className="list-unstyled">
-                                <li>{commo.comment}</li>
-                            </ul>
-                            <ul className="list-unstyled">
-                                <li>--{commo.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commo.date)))}</li>
-                            </ul>
-                        </div>
-                );
-        });
-        return(
-        <div>
-            <h4>Comments</h4>
-                {com}   
-        </div>
-        );
+                <li key={comment.id}>
+                  <p>{comment.comment}</p>
+                  <p>-- {comment.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                </li>
+            );
+        })
+            return(
+                <div className="col-12 col-md-5 m-1">
+                         <h4>Comments</h4>
+                   <ul className="list-unstyled">
+                       {com}
+                   </ul>
+               </div>
+       );
     }
 export default Dishdetail;
