@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom';
             <CardImgOverlay>
                 <CardTitle>{dish.name}</CardTitle>
             </CardImgOverlay>
-            </Link>
+                </Link>
             </Card>
           );
     }
