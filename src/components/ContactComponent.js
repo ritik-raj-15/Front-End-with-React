@@ -20,8 +20,8 @@ class Contact extends Component {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
         this.props.resetFeedbackForm();
+        this.props.postFeedback(values.firstname,values.lastname,values.telnum,values.email,values.agree,values.contactType,values.message);
     }
-
 
     render(){
         return(
@@ -179,9 +179,12 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Col md={{size: 10, offset: 2}}>
+                                <Col md={{size: 9, offset: 2,}}>
                                     <Button type="submit" color="primary">
                                         Send Feedback
+                                    </Button>{' '}
+                                    <Button outline color="primary">
+                                        Cancel
                                     </Button>
                                 </Col>
                             </Row>
