@@ -12,7 +12,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 ### `json-server --watch db.json -d 2000 -p 3001`
-Along with json-server to fetch the data 
+Use this command to fetch the data from json file to display in website. 
 
 ### `npm test`
 
